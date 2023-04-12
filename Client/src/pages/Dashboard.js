@@ -8,23 +8,23 @@ import ProductDetail from './productdetail/ProductDetail';
 import { ToastContainer, Toast, toast } from 'react-toastify';
 import Carousel from 'react-bootstrap/Carousel';
 import { useDispatch } from 'react-redux';
-import {BsFillHeartFill} from 'react-icons/bs'
-import img1 from "./../images/img1.png"
-import img2 from "./../images/img2.png"
-import img3 from "./../images/img3.png"
-import img4 from "./../images/img4.png"
-import { addWishlist } from '../redux/CartSlice'
+import { BsFillHeartFill } from 'react-icons/bs';
+import img1 from './../images/img1.png';
+import img2 from './../images/img2.png';
+import img3 from './../images/img3.png';
+import img4 from './../images/img4.png';
+import wishlist from "./../images/wishlist.jpg";
+import { addWishlist } from '../redux/CartSlice';
 import { useSelector } from 'react-redux';
-import {removeWishlist} from '../redux/CartSlice';
+import { removeWishlist } from '../redux/CartSlice';
 import { useLocation } from 'react-router-dom';
-
 
 function Shop() {
     const [productdata, setProductData] = useState([]);
     const [category, setCategory] = useState([]);
     const [filteredList, setFilteredList] = new useState(productdata);
     const state = useSelector((state) => state.carts);
-    
+
     //add if else
     useEffect(() => {
         axios
@@ -48,10 +48,7 @@ function Shop() {
             });
     }, []);
     const [show, setShow] = useState(false);
-    const dispatch =useDispatch()
-   
-    
-        
+    const dispatch = useDispatch();
 
     const filterSearch = (event) => {
         const query = event.target.value;
@@ -80,64 +77,67 @@ function Shop() {
                 });
             });
     };
-    
+
     console.log(filteredList);
     return (
         <div className="shop-container">
             <Header />
-            <div style={{paddingTop:"5px"}}>
-            <Carousel variant="dark">
-            <Carousel.Item>
-            <img
-          className="d-block w-100"
-          width={200} height={300}
-          src={img1}
-          alt="Second slide"
-        />
-        <Carousel.Caption>
-          <h5> </h5>
-          <p> </p>
-        </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-            
-        <img
-          className="d-block w-100"
-          width={200} height={300}
-          src={img2}
-          alt="First slide"
-        />
-        <Carousel.Caption>
-          <h5> </h5>
-          <p> </p>
-        </Carousel.Caption>
-      </Carousel.Item>
-     
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          width={200} height={300}
-          src={img3}
-          alt="Second slide"
-        />
-        <Carousel.Caption>
-          <h5> </h5>
-          <p> </p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item >
-            <img
-          className="d-block w-100"
-          width={200} height={300}
-          src={img4}
-          alt="Second slide"
-        />
-        <Carousel.Caption>
-          <h5> </h5>
-          <p> </p>
-        </Carousel.Caption>
-            </Carousel.Item>
-            </Carousel>
+            <div style={{ paddingTop: '5px' }}>
+                <Carousel variant="dark">
+                    <Carousel.Item>
+                        <img
+                            className="d-block w-100"
+                            width={200}
+                            height={300}
+                            src={img1}
+                            alt="Second slide"
+                        />
+                        <Carousel.Caption>
+                            <h5> </h5>
+                            <p> </p>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img
+                            className="d-block w-100"
+                            width={200}
+                            height={300}
+                            src={img2}
+                            alt="First slide"
+                        />
+                        <Carousel.Caption>
+                            <h5> </h5>
+                            <p> </p>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+
+                    <Carousel.Item>
+                        <img
+                            className="d-block w-100"
+                            width={200}
+                            height={300}
+                            src={img3}
+                            alt="Second slide"
+                        />
+                        <Carousel.Caption>
+                            <h5> </h5>
+                            <p> </p>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img
+                            className="d-block w-100"
+                            width={200}
+                            height={300}
+                            src={img4}
+                            alt="Second slide"
+                        />
+                        <Carousel.Caption>
+                            <h5> </h5>
+                            <p> </p>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                </Carousel>
             </div>
             <div class="topnav mt-4">
                 <input
@@ -152,7 +152,7 @@ function Shop() {
             <section class="products-shop section">
                 <div class="container">
                     <div class="row">
-                        <div >
+                        <div>
                             <div class="row align-items-center">
                                 <div class="col-lg-12 mb-4 mb-lg-0">
                                     <div class="section-title">
@@ -173,9 +173,7 @@ function Shop() {
                                                     class="orderby form-control"
                                                     aria-label="Shop order"
                                                 >
-                                                    <option
-                                                        value="-1"
-                                                    >
+                                                    <option value="-1">
                                                         Select Category
                                                     </option>
                                                     {category.map(
@@ -203,12 +201,20 @@ function Shop() {
                                     </div>
                                 </div>
                             </div>
-
+                            <h5>categories</h5>
+                            <div class="container">
+                                <img
+                                    src="https://images.ctfassets.net/hrltx12pl8hq/1fR5Y7KaK9puRmCDaIof7j/09e2b2b9eaf42d450aba695056793607/vector1.jpg"
+                                    class="img-circle"  
+                                    alt={wishlist}
+                                    width="204"
+                                    height="136"
+                                />
+                            </div>
                             <div class="row">
                                 {filteredList.length > 0 ? (
                                     filteredList.map((i, idx) => (
-                                        <div class="col-lg-4 mb-8"  >
-                                            
+                                        <div class="col-lg-4 mb-8">
                                             <ProductCard
                                                 item={i}
                                                 id={i.id}
@@ -218,8 +224,6 @@ function Shop() {
                                                 image={i.image}
                                                 rating={i.rating.rate}
                                             ></ProductCard>
-                                           
-                                          
                                         </div>
                                     ))
                                 ) : (
@@ -234,7 +238,6 @@ function Shop() {
                                 )}
                             </div>
                         </div>
-                       
                     </div>
                 </div>
             </section>

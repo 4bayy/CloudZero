@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProductDetail from "./pages/productdetail/ProductDetail";
 import Login from "./component/LoginModal";
 import CartPage from "./pages/cart/CartPage";
-import WishList from "./pages/WishList";
+import WishList from "./pages/wishlist/WishList";
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {

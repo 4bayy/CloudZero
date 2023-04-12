@@ -7,18 +7,18 @@ import './productcard.css';
 import { Button } from 'react-bootstrap';
 import { addCart, addWishlist } from '../../redux/CartSlice';
 import { useDispatch } from 'react-redux';
-import {BsFillHeartFill} from 'react-icons/bs';
+import { BsFillHeartFill } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
 import { removeWishlist } from '../../redux/CartSlice';
 import { useLocation } from 'react-router-dom';
-import {CiCircleRemove} from 'react-icons/ci';
-import {AiOutlineHeart} from 'react-icons/ai';
+import { CiCircleRemove } from 'react-icons/ci';
+import { AiOutlineHeart } from 'react-icons/ai';
 
 function ProductCard(props) {
     const navigate = useNavigate();
     const [show, setShow] = useState(false);
     const [addWish, setAddWish] = useState(true);
-    const dispatch =useDispatch();
+    const dispatch = useDispatch();
     const [showWishlist, setShowWishlist] = useState(false);
     const state = useSelector((state) => state.carts);
     const location = useLocation();
@@ -26,14 +26,11 @@ function ProductCard(props) {
     const checkLogin = (item) => {
         console.log('add to wishlist clicked');
         if (localStorage.token) {
-            
             console.log(item);
             if (!state.wishList.includes(item)) {
-                
                 dispatch(addWishlist(item));
                 setAddWish(false);
             } else {
-                
                 dispatch(removeWishlist(item));
                 setAddWish(true);
             }
@@ -42,27 +39,26 @@ function ProductCard(props) {
             setShow(true);
         }
     };
-    const handleMouseEnter = () =>{
+    const handleMouseEnter = () => {
         setShowWishlist(true);
-    }
-    const handleMouseLeave = () =>{
+    };
+    const handleMouseLeave = () => {
         setShowWishlist(false);
-    }
-    const onclickText = () =>{
-        if(localStorage.token){
-            navigate(`/productsdetail/${props.id}`)
-        }
-        else{
+    };
+    const onclickText = () => {
+        if (localStorage.token) {
+            navigate(`/productsdetail/${props.id}`);
+        } else {
             setShow(true);
         }
-    }
-    const moveToCart = (item) =>{
+    };
+    const moveToCart = (item) => {
         dispatch(addCart(item));
         dispatch(removeWishlist(item));
-    }
+    };
     return (
         <div class="product">
-            <div class="container " >
+            {/* <div class="container " >
                 
                 <div class="card " >
             {location.pathname === '/WishList' ? (<div style={{marginLeft:"250px"}}  onClick={()=>dispatch(removeWishlist(props.item))}><CiCircleRemove></CiCircleRemove></div>):("")}
@@ -99,6 +95,28 @@ function ProductCard(props) {
                            
                             </div>}
                     </div>
+                </div>
+            </div> */}
+
+            <div class="card">
+                <div class="view overlay">
+                    <img
+                        class="card-img-top"
+                        src={"https://wp-mktg.prod.getty1.net/istockcontentredesign/wp-content/uploads/sites/5/2020/06/2021_whatarevectorgraphics_hero.jpg"}
+                        alt="Cardimagecap"
+                    />
+                    <a href="#!">
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">{props.title}</h4>
+                    <p class="card-text">
+                        {props.price}       
+                    </p>
+                    <a href="#" class="btn btn-primary rounded  p-2 m-2" onClick={moveToCart}>
+                        Add to Cart 
+                    </a>
                 </div>
             </div>
         </div>

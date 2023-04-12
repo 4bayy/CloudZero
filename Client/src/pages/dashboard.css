@@ -12,6 +12,10 @@
     background-color: white;
     padding: 10px;
 }
+.img-circle
+{
+    border-radius: 10px;
+}
 /* #category-container
 {
   background-color: #fff;

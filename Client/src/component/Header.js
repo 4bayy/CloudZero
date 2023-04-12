@@ -44,8 +44,9 @@ function Header() {
         <>
             <ToastContainer />
             <nav
-                class="navbar navbar-expand-lg navbar-light bg-white w-100 navigation "
+                class="navbar navbar-expand-lg navbar-light bg-white w-100 navigation"
                 id="navbar"
+                style={{marginTop:"-30px"}}
             >
                 <Container>
                     <Navbar.Brand href="#home" className="font-weight-bold">
