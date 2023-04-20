@@ -1,6 +1,6 @@
 import Container from 'react-bootstrap/Container';
 import { Nav, Navbar, NavLink } from 'react-bootstrap';
-import images from '../../src/images/images.jpg';
+// import images from '../../src/images/images.jpg';
 import Login from './LoginModal';
 import { useState } from 'react';
 import AddProduct from './AddProductModal';
@@ -21,6 +21,7 @@ function Header() {
     const navigate = useNavigate();
     const state = useSelector((state) => state.carts);
     const location = useLocation();
+
     const logOut = () => {
         console.log(localStorage.token);
         navigate("/");
@@ -33,6 +34,7 @@ function Header() {
         });
         window.location.reload(false);
     };
+    
     const checkLogin = () => {
         if (localStorage.token) {
             setShowProduct(true);
@@ -49,8 +51,8 @@ function Header() {
                 style={{marginTop:"-30px"}}
             >
                 <Container>
-                    <Navbar.Brand href="#home" className="font-weight-bold">
-                    𝓒𝓵𝓸𝓾𝓭𝓩𝓮𝓻𝓸
+                    <Navbar.Brand href="#home" className="font-weight-bold navbar-logo">
+                   Cloud Zero 
                     </Navbar.Brand>
                     <Nav className="justify-content-end ">
                         {location.pathname === '/' && (

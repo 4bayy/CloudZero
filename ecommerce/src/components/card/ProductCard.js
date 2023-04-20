@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
 import ProductDetail from '../../pages/productdetail/ProductDetail';
 import { Link, useNavigate } from 'react-router-dom';
@@ -7,18 +8,19 @@ import './productcard.css';
 import { Button } from 'react-bootstrap';
 import { addCart, addWishlist } from '../../redux/CartSlice';
 import { useDispatch } from 'react-redux';
-import {BsFillHeartFill} from 'react-icons/bs';
+import { BsFillHeartFill } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
 import { removeWishlist } from '../../redux/CartSlice';
 import { useLocation } from 'react-router-dom';
-import {CiCircleRemove} from 'react-icons/ci';
-import {AiOutlineHeart} from 'react-icons/ai';
+import { CiCircleRemove } from 'react-icons/ci';
+import { AiOutlineHeart } from 'react-icons/ai';
+import notfound from '../../images/notfound.jpg';
 
 function ProductCard(props) {
     const navigate = useNavigate();
     const [show, setShow] = useState(false);
     const [addWish, setAddWish] = useState(true);
-    const dispatch =useDispatch();
+    const dispatch = useDispatch();
     const [showWishlist, setShowWishlist] = useState(false);
     const state = useSelector((state) => state.carts);
     const location = useLocation();
@@ -26,14 +28,11 @@ function ProductCard(props) {
     const checkLogin = (item) => {
         console.log('add to wishlist clicked');
         if (localStorage.token) {
-            
             console.log(item);
             if (!state.wishList.includes(item)) {
-                
                 dispatch(addWishlist(item));
                 setAddWish(false);
             } else {
-                
                 dispatch(removeWishlist(item));
                 setAddWish(true);
             }
@@ -42,36 +41,32 @@ function ProductCard(props) {
             setShow(true);
         }
     };
-    const handleMouseEnter = () =>{
+    const handleMouseEnter = () => {
         setShowWishlist(true);
-    }
-    const handleMouseLeave = () =>{
+    };
+    const handleMouseLeave = () => {
         setShowWishlist(false);
-    }
-    const onclickText = () =>{
-        if(localStorage.token){
-            navigate(`/productsdetail/${props.id}`)
-        }
-        else{
+    };
+    const onclickText = () => {
+        if (localStorage.token) {
+            navigate(`/productsdetail/${props.id}`);
+        } else {
             setShow(true);
         }
-    }
-    const moveToCart = (item) =>{
+    };
+    const moveToCart = (item) => {
         dispatch(addCart(item));
         dispatch(removeWishlist(item));
-    }
+    };
     return (
-        <div class="product">
-            <div class="container " >
-                
+        <div class="product-card">
+            {/* <div class="container " >
                 <div class="card " >
             {location.pathname === '/WishList' ? (<div style={{marginLeft:"250px"}}  onClick={()=>dispatch(removeWishlist(props.item))}><CiCircleRemove></CiCircleRemove></div>):("")}
 
                     <img src={props.image} alt="" onClick={onclickText} />
-
                     <div class="card-body" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{height:"250px"}}>
                         <div class="row" >
-                            
                             <div class="card-title">
                                 <h4 className='card-text' onClick={onclickText}>{props.title}</h4>
                                 <span class="price">
@@ -100,7 +95,18 @@ function ProductCard(props) {
                             </div>}
                     </div>
                 </div>
+            </div> */}
+           <div className='card' style={{border:"1px solid black",padding:"2px"}}>
+            <div>
+                <img src={notfound} alt='cardimage' 
+                style={{height:"200px"}}
+                ></img>
             </div>
+            <div>
+                <h5>{props.title} </h5>
+                <p> {props.price}</p>
+            </div>
+           </div>
         </div>
     );
 }

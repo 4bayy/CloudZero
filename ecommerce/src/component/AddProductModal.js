@@ -6,24 +6,43 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { base_url } from '../Constants';
 import { error } from 'jquery';
+import { ToastContainer, Toast, toast } from 'react-toastify';
 
 function AddProduct({ show, setShow }) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [productCategory, setProductCategory] = useState([]);
+    const [data,setData]=useState({});
 
-    const [values, setValues] = useState({
-        name: '',
-        description: '',
-        price: '',
-        categoryId: ''
-    });
-    const onChange = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
-        console.log(e);
-        setValues({ ...values,[name]:value});
-    };
+    const updateData = e =>{
+        setData({
+            ...data,
+            [e.target.name] : e.target.value
+        })
+    }
+    const submit = e =>{
+        e.preventDefault()
+        console.log(data);
+        axios.post(base_url+'Prodduct',{
+            name:data.name,
+            description:data.description,
+            price:data.price,
+            categoryId:data.category
+        })
+        .then((res)=>{
+            console.log(res);
+        })
+        .catch((error)=>{
+            console.log(error);
+            toast.error("Something went wrong ",{
+                position:'bottom-center',
+                autoClose:1000,
+                hideProgressBar:false,
+                theme:'light'
+            })
+
+        });
+    }
     useEffect(() => {
         axios
             .get(base_url + `Category`)
@@ -35,13 +54,11 @@ function AddProduct({ show, setShow }) {
                 console.log(error);
             });
     }, []);
+
+ 
+
     console.log(productCategory);
-    useEffect(() => {
-        axios.post(base_url + `Product/product/register`);
-    });
-    const onHandleSubmit = () => {
-        console.log(values);
-    };
+
     return (
         <>
             <Modal show={show} onHide={handleClose}>
@@ -57,7 +74,7 @@ function AddProduct({ show, setShow }) {
                                 placeholder="Product title"
                                 autoFocus
                                 name="name"
-                                onChange={onChange}
+                                onChange={updateData}
                             />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="Price">
@@ -67,14 +84,14 @@ function AddProduct({ show, setShow }) {
                                 placeholder="Product Price"
                                 autoFocus
                                 name="price"
-                                onChange={onchange}
+                                onChange={updateData}
                             />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="category">
-                            <Form.Select aria-label="category">
+                            <Form.Select aria-label="category" name="category" onChange={updateData}>
                                 <option>select category</option>
                                 {productCategory.map((i) => (
-                                    <option key={i.id} value={i.name}>
+                                    <option key={i.id} value={i.id}>
                                         {i.name}
                                     </option>
                                 ))}
@@ -86,7 +103,7 @@ function AddProduct({ show, setShow }) {
                                 as="textarea"
                                 rows={3}
                                 name="description"
-                                onChange={onchange}
+                                onChange={updateData}
                             />
                         </Form.Group>
                         <Form.Group controlId="formFile" className="mb-3">
@@ -104,7 +121,7 @@ function AddProduct({ show, setShow }) {
                     </Button>
                     <Button
                         variant="primary p-2 rounded"
-                        onClick={onHandleSubmit}
+                        onClick={submit}
                     >
                         Add Product
                     </Button>

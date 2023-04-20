@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:regular,bold,italic&subset=latin,latin-ext');
+
 #header-section {
     background-color: antiquewhite;
 }
@@ -12,12 +14,10 @@
     background-color: white;
     padding: 10px;
 }
-.product-home-brandsec
-{
+.product-home-brandsec {
     padding: 30px;
     /* background-color: "black"; */
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-
 }
 #dashboard-card {
     display: flex;
@@ -29,20 +29,19 @@
     float: left;
     width: 33.33%;
     padding: 5px;
-  }
- .producthome-category
- {
+}
+.producthome-category {
     /* /* padding-left: 20px; */
-    padding-right: 30px; 
+    padding-right: 30px;
     justify-content: space-between;
- }
-  
-  /* Clearfix (clear floats) */
-  .product-home-brandsec-div::after {
-    content: "";
+}
+
+/* Clearfix (clear floats) */
+.product-home-brandsec-div::after {
+    content: '';
     clear: both;
     display: table;
-  }
+}
 .topnav {
     width: 100%;
 }
@@ -53,11 +52,6 @@
     padding: 20px;
     padding-left: 20vw;
 }
-/* .search-btn  
-{
-    width: 20px;
-    height: 30px;
-} */
 #categories {
     /* display: inline; */
     font-size: 20px;
@@ -75,28 +69,55 @@
 #cards {
     margin-top: 10px;
 }
+.search-container
+{
+    padding-top: 40px   ;
+}
 
 .category-components:hover {
     top: -10px;
     left: -10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
-
-/* #dashboard-card {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  } */
-/* .card{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}   */
 .product-card-container {
     flex: 0 0 calc(33.33% - 20px);
     min-width: 200px;
     margin: 10px;
     margin-top: 10vh;
+}
+.products-category-section
+{
+    padding-top: 180px;
+    padding-bottom: 100px;
+    width: 100%;
+   text-align: center;
+}
+.product-category-text
+{
+    padding-bottom: 40px;
+}
+.product-card
+{
+    padding: 5px;
+}
+.category-whatsspecial-subheading
+{
+    font-size: 28px;
+}
+.category-whatsspecial
+{
+    font-family: Vidaloka;
+    font-size: 42px;
+    text-transform: uppercase;
+}
+.dashboard-category-div
+{
+    margin-top: 25px;
+    padding-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
 }
 #dashboard-heading {
     text-transform: uppercase;
@@ -119,9 +140,79 @@
     display: inline-block;
     font-size: 50px;
 }
+.dashboard-category-section {
+    background-color: black;
+    color: white;
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: '8px';
+    padding: 10px;
+}
+.dashboard-category-section :hover{
+  background-color: white;
+  
+}
+.dashboard-category-section-text {
+    display: inline-flex;
+}
+.dashboard-corousal {
+    position: absolute;
+    top: 1px;
+    text-align: center;
+}
+.corousal-heading {
+    font-size: 70px;
+    font-family: Poppins, Arial, Helvetica, sans-serif;
+    color: white;
+}
+.corousal-para {
+    font-size: 30px;
+    letter-spacing: 1.5px;
+}
+.corousal-button {
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: black;
+    color: white;
+    border-radius: 3px;
+}
+
+/* Loader */
+    .loading{
+        text-align: center;
+        width: 300px;
+        height: 50px;
+        position: relative;
+        margin: 0 auto;
+        /* margin-top: 25%; */
+        color: white;
+        font-size: 30px;
+        font-family: 'Quicksand', sans-serif;
+    }
+    .loading:before{
+    content: '';
+    animation: load 15s linear ;
+}
+.loading:before{
+    content: 'COMPLETED...!!';
+    font-size: 20px;
+}
+@keyframes load{
+    0%{content: 'STARTING';}
+    10%{content: 'loading.';}
+    20%{content: 'Loading..';}
+    30%{content: 'LOading...';}
+    40%{content: 'LOAding....';}
+    50%{content: 'LOADing.....';}
+    60%{content: 'LOADIng......';}
+    70%{content: 'LOADINg.......';}
+    80%{content: 'LOADING........';}
+    85%{content: 'COMPLETED...!!';}
+}
+
 /* Category Css. */
 @import url('https://fonts.googleapis.com/css?family=Poppins|Ubuntu&display=swap');
-
 
 .box {
     position: relative;
@@ -183,5 +274,14 @@
 @keyframes textclip {
     to {
         background-position: 200% center;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .corousal-para {
+        font-size: 30px;
+        color: white;
+        font-weight: 600;
+        letter-spacing: 1px;
     }
 }
