@@ -8,13 +8,15 @@ import CartPage from "./pages/cart/CartPage";
 import WishList from "./pages/WishList";
 import Register from "./pages/register/Register";
 import 'react-toastify/dist/ReactToastify.css';
+import AdminDashboard from "./pages/admin/AdminDashboard";
 
 function App() {
   return (<>
     <BrowserRouter>;
-    <Routes>
+    <Routes>  
       <Route path="/" element={<Dashboard/>}></Route>
       <Route path="/login" element={<Login/>}></Route>
+      <Route path="/admin" element={<AdminDashboard/>}></Route>
       <Route path="/cartpage" element={<CartPage/>}></Route>
       <Route path="/register" element={<Register/>}></Route>
       <Route path="/wishlist" element={<WishList/>}></Route>

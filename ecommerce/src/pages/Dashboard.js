@@ -12,6 +12,10 @@ import { BsFillHeartFill } from 'react-icons/bs';
 import sliderimageone from './../images/sliderimage.jpg';
 import sliderimagetwo from './../images/joyful-girl-with-curly-brown-hair.jpg';
 import sliderimagethree from './../images/magnificent-woman-long-bright-skirt.jpg';
+import offerimageone from "./../images/offerimageone.jpg";
+import offerimagetwo from "./../images/offerimagetwo.jpg";
+import offerimagethree from "./../images/offerimagethree.jpg";
+import offerimagefour from "./../images/offerimagefourjpg.jpg";
 import { addWishlist } from '../redux/CartSlice';
 import { useSelector } from 'react-redux';
 import { removeWishlist } from '../redux/CartSlice';
@@ -71,22 +75,39 @@ function Shop() {
             console.log('Something Bad Happen');
         }
     };
-    const getProduct =async()=>{
+    const getProduct = async () => {
         try {
-            const res = await axios.get(base_url+`Product/Product/Get`).then((res)=>{
-                if (res.data !=null){
-                    console.log(res.data);
-                    setProductData(res.data);
-                }
-            })
+            const res = await axios
+                .get(base_url + `Product/Product/Get`)
+                .then((res) => {
+                    if (res.data != null) {
+                        console.log(res.data);
+                        setProductData(res.data);
+                    }
+                });
         } catch (error) {
             console.log(error);
         }
-    }
+    };
 
     return (
         <div className="shop-container">
             <Header />
+            <div className="dashboard-category-div">
+                {category.length > 0 ? (
+                    category.map((i, idx) => (
+                        <div className="dashboard-category-section" key={idx}>
+                            <div className="dashboard-category-section-text">
+                                {i.name}
+                            </div>
+                        </div>
+                    ))
+                ) : (
+                    <div>
+                        <div className="loading"></div>
+                    </div>
+                )}
+            </div>
             <div
                 className="corousal-container"
                 style={{
@@ -96,50 +117,7 @@ function Shop() {
                 }}
             >
                 <Carousel variant="dark">
-                    <Carousel.Item>
-                        <img
-                            className="d-block w-100"
-                            height={500}
-                            src={sliderimageone}
-                            alt="Second slide"
-                        />
-                        <Carousel.Caption className="row dashboard-corousal">
-                            <div className="col-12 col-md-3"></div>
-                            <div className="col-7">
-                                <h5 className="corousal-heading">LOOKBOOK </h5>
-                                <p className="corousal-para">
-                                    {' '}
-                                    TRY TO BE NEW LOOK{' '}
-                                </p>
-                                <button className="corousal-button">
-                                    Shop Now
-                                </button>
-                            </div>
-                        </Carousel.Caption>
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img
-                            className="d-block w-100"
-                            height={500}
-                            src={sliderimagetwo}
-                            alt="First slide"
-                        />
-                        <Carousel.Caption className="dashboard-corousal">
-                            <div className="col-5"></div>
-                            <div className="col-4">
-                                <h5 className="corousal-heading">SEPTEMBER </h5>
-                                <p className="corousal-para">
-                                    {' '}
-                                    SEASON SALE 75 % DISCOUNT{' '}
-                                </p>
-                                <button className="corousal-button">
-                                    Shop Now
-                                </button>
-                            </div>
-                        </Carousel.Caption>
-                    </Carousel.Item>
-
-                    <Carousel.Item>
+                <Carousel.Item>
                         <img
                             className="d-block w-100"
                             height={500}
@@ -163,25 +141,39 @@ function Shop() {
                             </div>
                         </Carousel.Caption>
                     </Carousel.Item>
-                </Carousel>
-                <div className="dashboard-category-div">
-                    {category.length > 0 ? (
-                        category.map((i, idx) => (
-                            <div
-                                className="dashboard-category-section"
-                                key={idx}
-                            >
-                                <div className="dashboard-category-section-text">
-                                    {i.name}
-                                </div>
+                    
+                    <Carousel.Item>
+                        <img
+                            className="d-block w-100"
+                            height={500}
+                            src={sliderimageone}
+                            alt="Second slide"
+                        />
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img
+                            className="d-block w-100"
+                            height={500}
+                            src={sliderimagetwo}
+                            alt="First slide"
+                        />
+                        <Carousel.Caption className="dashboard-corousal">
+                            <div className="col-5"></div>
+                            <div className="col-4">
+                                <h5 className="corousal-heading">SEPTEMBER </h5>
+                                <p className="corousal-para">
+                                    {' '}
+                                    SEASON SALE 75 % DISCOUNT{' '}
+                                </p>
+                                <button className="corousal-button">
+                                    Shop Now
+                                </button>
                             </div>
-                        ))
-                    ) : (
-                        <div>
-                            <div className="loading"></div>
-                        </div>
-                    )}
-                </div>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+
+                    
+                </Carousel>
             </div>
             <div className="topnav mt-4 search-container ">
                 <input
@@ -206,19 +198,51 @@ function Shop() {
                             background: '#ADD8E6',
                             color: '#ADD8E6',
                             borderColor: '#ADD8E6',
-                            height: '3px', 
-                            margin:'0px 10px 0px 10px'                                                  
+                            height: '3px',
+                            margin: '0px 10px 0px 10px'
                         }}
                     />
-                    <p className='category-whatsspecial-subheading'>FOR TODAY ?</p>
+                    <p className="category-whatsspecial-subheading">
+                        FOR TODAY ?
+                    </p>
                 </div>
 
                 {/* <CategoryCard></CategoryCard> */}
-                <div className='product-card d-flex'>
-                {productdata.map((i)=>(
-                    <ProductCard title={i.name} price={i.price}></ProductCard>
+                <div className="product-card d-flex">
+                    {productdata.map((i) => (
+                        <ProductCard
+                            title={i.name}
+                            price={i.price}
+                        ></ProductCard>
                     ))}
-                    </div>
+                </div>
+            </div>
+
+            {/* Featues Section. */}
+            <div className="dashboard-features-section">
+                <div className="parallax">
+                    <h3 className="parallax-text"> free SHIPPPING & RETURN</h3>
+                </div>
+            </div>
+            <div className='dashboard-offer-section'>
+                <h1 class="animate-charcter" >OFFER ZONE </h1>
+            <div className="row">
+                <div className="col dashboard-offer-section-divone " >
+                    <div style={{marginLeft:"20px"}}>
+                   <img src={offerimageone}  alt={"offerimageone"}className='offerimage'></img>
+                   <img src={offerimagetwo}alt={"offerimagetwo"} className='offerimage' ></img>
+                   </div>
+                </div>
+                <div className="col">
+                <img src={offerimagethree}  alt={"offerimagethree"}
+                className='offerimage-three' 
+                ></img>
+                  
+                </div>
+            </div>
+            <div class="row p-5">
+                <img src={offerimagefour} alt='offerimagefour' height={170}/>
+            </div>
             </div>
             <Footer></Footer>
         </div>

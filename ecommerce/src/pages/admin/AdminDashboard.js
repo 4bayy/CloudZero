@@ -15,16 +15,16 @@ function AdminDashboard() {
 
             <div class="content">
                 <h2>Responsive Sidebar Example</h2>
-                <p>
-                    This example use media queries to transform the sidebar to a
-                    top navigation bar when the screen size is 700px or less.
-                </p>
-                <p>
-                    We have also added a media query for screens that are 400px
-                    or less, which will vertically stack and center the
-                    navigation links.
-                </p>
-                <h3>Resize the browser window to see the effect.</h3>
+                <div className='row '>
+               <div  className='admin-product-management col '>
+                 <h5>User Product Managemnet</h5> 
+                 <div className='row'>
+                    <div className='col'>Add Product</div>
+                    <div className='col'>View Orders</div>
+                 </div>
+               </div>
+               <div  className='admin-category-management col'><h5>User Category Managemnet</h5></div>
+               </div>
             </div>
         </div>
     );

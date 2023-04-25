@@ -8,6 +8,7 @@ import { ToastContainer, Toast, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
+import { isAdministrator, setToken } from '../utils/tokenHelper';
 
 const loginSchema = Yup.object().shape({
   username: Yup.string().required('Username is required'),
@@ -20,7 +21,6 @@ function Login({ show, setShow }) {
     const handleShow = () => setShow(true);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [token, setToken] = useState('');
     const navigate = useNavigate();
   
     const handleSubmit = async (event) => {
@@ -30,22 +30,24 @@ function Login({ show, setShow }) {
       try {
         await loginSchema.validate({ username, password });
         axios
-          .post('https://fakestoreapi.com/auth/login', {
-            username: username,
+          .post('https://localhost:7004/api/Accounts/login', {
+            email: username,
             password: password,
           })
           .then((res) => {
-            if (res.data && res.data.token) {
-              setToken(res.data.token);
-              localStorage.setItem('token', res.data.token);
-              handleClose();
-              alert('Logged Succesfully');
-            }
+             console.log(res);
+             setToken(res.data.result);
+             console.log("Logged Succesfully");
+             if(isAdministrator())
+             {
+                 console.log(isAdministrator());
+                 return navigate('/admin');
+             }
+             return navigate('/');
           })
           .catch((err) => {
             alert('login failed');
           });
-        console.log(token);
       } catch (error) {
         toast.error(error.message);
       }
