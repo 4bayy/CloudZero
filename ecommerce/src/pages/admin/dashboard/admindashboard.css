@@ -1,0 +1,34 @@
+
+.content
+{
+  margin-left: 300px;
+}
+
+
+d.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 1000px;
+}
+.admin-product-management
+{
+  background-color:  aliceblue;
+  /* height: 0px; */
+  margin: 30px;
+  justify-content: center;
+  align-items: center;
+}
+.admin-category-management
+{
+  background-color: aquamarine;
+  right: 10px;
+  height: 140px;
+  margin: 30px;
+
+}
+.admin-adproduct
+{
+  width: 50%;
+
+}
+

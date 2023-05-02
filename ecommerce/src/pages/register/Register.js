@@ -32,12 +32,13 @@ function Register() {
     console.log(values.email);
 
     try {
+        console.log("call reached here ");
        await  axios.post(`https://localhost:7004/api/Accounts/user/register`,{
-            Fname:`${values.name}`,
-            Password:`${values.password}`,
-            Email:`${values.email}`
+            fname:`${values.name}`,
+            password:`${values.password}`,
+            email:`${values.email}`
 
-        },{headers:{"Content-Type" : "application/json"}})
+        })
         .then((res)=>{
             console.log("Succesfully Registered");
             console.log(res);

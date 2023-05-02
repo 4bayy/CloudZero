@@ -1,5 +1,6 @@
 import Header from '../component/Header';
-import ProductCard from '../components/card/ProductCard';
+import Card from '../components/card/ProductCard';
+
 import './dashboard.css';
 import { base_url } from '../Constants';
 import { useEffect, useState } from 'react';
@@ -9,24 +10,29 @@ import { ToastContainer, Toast, toast } from 'react-toastify';
 import Carousel from 'react-bootstrap/Carousel';
 import { useDispatch } from 'react-redux';
 import { BsFillHeartFill } from 'react-icons/bs';
-import sliderimageone from './../images/sliderimage.jpg';
-import sliderimagetwo from './../images/joyful-girl-with-curly-brown-hair.jpg';
+import sliderimageone from './../images/sliderimageone.png';
+import sliderimagetwo from './../images/sliderimagetwo.png';
 import sliderimagethree from './../images/magnificent-woman-long-bright-skirt.jpg';
-import offerimageone from "./../images/offerimageone.jpg";
-import offerimagetwo from "./../images/offerimagetwo.jpg";
-import offerimagethree from "./../images/offerimagethree.jpg";
-import offerimagefour from "./../images/offerimagefourjpg.jpg";
+import offerimageone from './../images/offerimageone.jpg';
+import offerimagetwo from './../images/offerimagetwo.jpg';
+import offerimagethree from './../images/offerimagethree.jpg';
+import offerimagefour from './../images/offerimagefourjpg.jpg';
+import hmlogo from "./../images/hmlogo.png";
+import zara from "./../images/zara.png";
+import nike from "./../images/nike.png";
+import fitch from "./../images/fitch.png";
 import { addWishlist } from '../redux/CartSlice';
 import { useSelector } from 'react-redux';
 import { removeWishlist } from '../redux/CartSlice';
 import { useLocation } from 'react-router-dom';
 import { error } from 'jquery';
 import Footer from '../components/footer/Footer';
-import CategoryCard from '../components/card/CategoryCard';
 
 function Shop() {
     const [productdata, setProductData] = useState([]);
     const [category, setCategory] = useState([]);
+    const [products,setProducts]=useState([]);
+
     const [filteredList, setFilteredList] = new useState(productdata);
     const state = useSelector((state) => state.carts);
 
@@ -60,6 +66,7 @@ function Shop() {
     useEffect(() => {
         getCategories();
         getProduct();
+        getProducts();
     }, []);
 
     const getCategories = async () => {
@@ -89,11 +96,24 @@ function Shop() {
             console.log(error);
         }
     };
-
+    const getProducts=()=>{
+        try {
+            axios.get(base_url+`Product/Product/Get`)
+            .then((res)=>{
+                console.log(res);
+            if (res.data)
+            {
+                setProducts(res.data);
+            }
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
     return (
         <div className="shop-container">
             <Header />
-            <div className="dashboard-category-div">
+            {/* <div className="dashboard-category-div">
                 {category.length > 0 ? (
                     category.map((i, idx) => (
                         <div className="dashboard-category-section" key={idx}>
@@ -107,21 +127,28 @@ function Shop() {
                         <div className="loading"></div>
                     </div>
                 )}
+            </div> */}
+            <div className='dashboard-static-section'>
+                <div id="dashboard-content-one">
+                <p id='dashboard-heading-paraone'>In this season, find the best 🔥</p>
+                <h1 id='dashboard-heading-title'>Exclusive collection<br/> for everyone</h1>
+                <button className='exploremore-btn'>Explore More </button>
+                </div>
             </div>
             <div
                 className="corousal-container"
                 style={{
-                    padding: ' 0px',
-                    borderRadius: '8px',
-                    margin: '0 10px'
+                    borderRadius: '30px',
+                    margin:"30px"
                 }}
-            >
-                <Carousel variant="dark">
-                <Carousel.Item>
+            >              
+                <h2 className='new-arrival-text'>New Arrivals. REY backpacks & bags</h2>
+                <Carousel variant="dark" >
+                    <Carousel.Item>
                         <img
                             className="d-block w-100"
-                            height={500}
-                            src={sliderimagethree}
+                            height={300}
+                            src={sliderimageone}
                             alt="Second slide"
                         />
                         <Carousel.Caption className="dashboard-corousal">
@@ -141,27 +168,19 @@ function Shop() {
                             </div>
                         </Carousel.Caption>
                     </Carousel.Item>
-                    
+
                     <Carousel.Item>
                         <img
                             className="d-block w-100"
-                            height={500}
-                            src={sliderimageone}
-                            alt="Second slide"
-                        />
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img
-                            className="d-block w-100"
-                            height={500}
+                            height={300}
                             src={sliderimagetwo}
                             alt="First slide"
                         />
                         <Carousel.Caption className="dashboard-corousal">
                             <div className="col-5"></div>
                             <div className="col-4">
-                                <h5 className="corousal-heading">SEPTEMBER </h5>
-                                <p className="corousal-para">
+                                <h5 className="slidertwo-heading">SEPTEMBER </h5>
+                                <p className="slidertwo-para">
                                     {' '}
                                     SEASON SALE 75 % DISCOUNT{' '}
                                 </p>
@@ -171,78 +190,90 @@ function Shop() {
                             </div>
                         </Carousel.Caption>
                     </Carousel.Item>
-
-                    
                 </Carousel>
             </div>
-            <div className="topnav mt-4 search-container ">
-                <input
-                    type="text"
-                    placeholder="Search jewelleries,watches,bags,tops..."
-                    className="form-control mb-2 "
-                    style={{
-                        margin: '15px auto',
-                        borderRadius: '10px',
-                        width: '50%'
-                    }}
-                    //onchange
-                />
-            </div>
-            <div className="products-category-section">
-                <div className="product-category-text">
-                    <h2 className="ps-4 category-whatsspecial">
-                        WHATS SPECIAL
-                    </h2>
-                    <hr
-                        style={{
-                            background: '#ADD8E6',
-                            color: '#ADD8E6',
-                            borderColor: '#ADD8E6',
-                            height: '3px',
-                            margin: '0px 10px 0px 10px'
-                        }}
-                    />
-                    <p className="category-whatsspecial-subheading">
-                        FOR TODAY ?
-                    </p>
-                </div>
 
-                {/* <CategoryCard></CategoryCard> */}
-                <div className="product-card d-flex">
-                    {productdata.map((i) => (
-                        <ProductCard
-                            title={i.name}
-                            price={i.price}
-                        ></ProductCard>
-                    ))}
-                </div>
-            </div>
+            <div className='home-product-section'>
+               <h2 className='category-whatsspecial'>Shop Now</h2>
+               <div className='product-cards'>
+               {products.map((i,idx)=>(
+                               <Card id ={i.id} index={idx} title={i.name} description={i.description} />
+                               ))}
+                               </div>
 
+            </div>
             {/* Featues Section. */}
             <div className="dashboard-features-section">
                 <div className="parallax">
-                    <h3 className="parallax-text"> free SHIPPPING & RETURN</h3>
+                    <h3 className="parallax-text"> FREE SHIPPPING & RETURN</h3>
                 </div>
             </div>
-            <div className='dashboard-offer-section'>
-                <h1 class="animate-charcter" >OFFER ZONE </h1>
-            <div className="row">
-                <div className="col dashboard-offer-section-divone " >
-                    <div style={{marginLeft:"20px"}}>
-                   <img src={offerimageone}  alt={"offerimageone"}className='offerimage'></img>
-                   <img src={offerimagetwo}alt={"offerimagetwo"} className='offerimage' ></img>
-                   </div>
-                </div>
-                <div className="col">
-                <img src={offerimagethree}  alt={"offerimagethree"}
-                className='offerimage-three' 
-                ></img>
-                  
+            <div className="dashboard-offer-section">
+                {/* <div className="row">
+                    <div className="col dashboard-offer-section-divone ">
+                        <div style={{ marginLeft: '20px' }}>
+                            <img
+                                src={offerimageone}
+                                alt={'offerimageone'}
+                                className="offerimage"
+                            ></img>
+                            <img
+                                src={offerimagetwo}
+                                alt={'offerimagetwo'}
+                                className="offerimage"
+                            ></img>
+                            
+                        </div>
+                    </div>
+                    <div className="col">
+                        <img
+                            src={offerimagethree}
+                            alt={'offerimagethree'}
+                            className="offerimage-three"
+                        ></img>
+                          <img
+                            src={offerimagethree}
+                            alt={'offerimagethree'}
+                            className="offerimage-three"
+                        ></img>
+                    </div>
+                </div> */}
+            </div>
+            <div className='m-4'>
+                <h3 style={{fontSize: "1.875rem",lineHeight: "2.25rem",fontWeight:"600"}}>Discover more. <span>Good things are waiting for you</span></h3>
+                <div className='row p-3 m-4'>
+                    <div className='col new-arrivals'>
+                        <p>Explore new arrivals</p>
+                        <h5>Shop the Latest from top brands</h5>
+                        <button className='rounded p-2 showme-all' >Show me all</button>
+                    </div>
+                    <div className='col gift-cards'>
+                    <p>Explore new arrivals</p>
+                        <h5>Shop the Latest from top brands</h5>
+                        <button className='rounded p-2 showme-all' >Show me all</button>
+                    </div>
                 </div>
             </div>
-            <div class="row p-5">
-                <img src={offerimagefour} alt='offerimagefour' height={170}/>
-            </div>
+            <div className="products-category-section">
+                <div className="product-category-text">
+                    <h2 className="category-whatsspecial">
+                        Popular Brands 
+                    </h2>
+                    <div className='row brands-container'>
+                        <div className='col'>
+                            <img src={hmlogo} alt="brandsimage" width={"80px"}></img>
+                        </div>
+                        <div className='col'>
+                        <img src={zara} alt="brandsimage" width={"80px"} className='pt-4'></img>
+                        </div>
+                        <div className='col'>
+                        <img src={nike} alt="brandsimage" width={"80px"} className='pt-3'></img>
+                        </div>
+                        <div className='col'>
+                        <img src={fitch} alt="brandsimage" width={"80px"}></img>
+                        </div>
+                     </div>
+                </div>
             </div>
             <Footer></Footer>
         </div>

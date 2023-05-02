@@ -1,59 +1,50 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
-import ProductDetail from '../../pages/productdetail/ProductDetail';
-import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { ToastContainer, Toast, toast } from 'react-toastify';
-import Login from '../../component/LoginModal';
-import './productcard.css';
-import { Button } from 'react-bootstrap';
-import { addCart, addWishlist } from '../../redux/CartSlice';
-import { useDispatch } from 'react-redux';
-import { BsFillHeartFill } from 'react-icons/bs';
-import { useSelector } from 'react-redux';
-import { removeWishlist } from '../../redux/CartSlice';
-import { useLocation } from 'react-router-dom';
-import notfound from '../../images/notfound.jpg';
+import { Link } from 'react-router-dom';
+import "./productcard.css";
 
-function ProductCard(props) {
-    const navigate = useNavigate();
-    const [show, setShow] = useState(false);
-    const [addWish, setAddWish] = useState(true);
-    const dispatch = useDispatch();
-    const state = useSelector((state) => state.carts);
-    const location = useLocation();
+function Card(props) {
 
-    const checkLogin = (item) => {
-        console.log('add to Cart clicked');
-        if (localStorage.token) {
-            console.log(item);
-        } else {
-            console.log('Need to Login');
-            setShow(true);
-        }
-    };
-    const onclickText = () => {
-        if (localStorage.token) {
-            navigate(`/productsdetail/${props.id}`);
-        } else {
-            setShow(true);
-        }
-    };
+ 
+    const needLogin=()=>{
+        toast.info('Need Login', {
+            position: 'top-right',
+            autoClose: 3000,
+            hideProgressBar: false,
+            theme: 'light'
+        })
+    }
 
     return (
-        <div class="product-card">
-           <div className='card' style={{border:"1px solid black",padding:"2px"}}>
-            <div>
-                <img src={notfound} alt='cardimage' 
-                style={{height:"200px"}}
-                ></img>
-            </div>
-            <div>
-                <h5 >{props.title} </h5>
-                <p> {props.price}</p>
-            </div>
-            <button className=' btn-sm btn-primary m-4' >+Cart</button>
-           </div>
+        <div>
+                <div className="card" key={props.index}>
+                <img
+                    className="card-imgtop p-4"
+                    width={"100%"}
+                    src="https://mdbootstrap.com/img/Photos/Others/images/43.webp"
+                    alt="Cardimage cap"
+                />
+                <div className="card-body">
+                    <h4 id="cardtitle"  >
+                       <Link>{props.title}</Link>
+                    </h4>
+
+                    <p className="card-text">
+                        {props.price}
+                    </p>
+                    {localStorage.token ? (
+                    //  <a href="#" className="btn-sm ps-3 pe-3 btn-primary  viewmore-btn">
+                      <Link to={`/productsdetail/${props.id}`} className='viewmore-btn'>View  More</Link>
+                    //  </a>
+                    ):(
+                        <button  onClick={needLogin}>Login</button>
+                    )}
+                   
+                </div>
+                </div>
         </div>
     );
 }
-export default ProductCard;
+export default Card;

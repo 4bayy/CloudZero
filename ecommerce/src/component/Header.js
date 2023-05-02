@@ -14,10 +14,12 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {BsHeart} from 'react-icons/bs'
+import { base_url } from '../Constants';
 
 function Header() {
     const [show, setShow] = useState(false);
-    const [showProduct, setShowProduct] = useState(false);
+    const [category, setCategory] = useState([]);
+    // const [showProduct, setShowProduct] = useState(false);
     const navigate = useNavigate();
     const state = useSelector((state) => state.carts);
     const location = useLocation();
@@ -37,9 +39,22 @@ function Header() {
     
     const checkLogin = () => {
         if (localStorage.token) {
-            setShowProduct(true);
+            // setShowProduct(true);
         } else {
             setShow(true);
+        }
+    };
+    const getCategories = async () => {
+        try {
+            const res = await axios.get(base_url + `Category`).then((res) => {
+                if (res.data != null) {
+                    console.log(res.data);
+                    setCategory(res.data);
+                    console.log(category);
+                }
+            });
+        } catch (err) {
+            console.log('Something Bad Happen');
         }
     };
     return (
@@ -48,19 +63,20 @@ function Header() {
             <nav
                 class="navbar navbar-expand-lg navbar-light bg-white w-100 navigation  "
                 id="navbar"
-                style={{marginTop:"-30px"}}
+                // style={{marginTop:"-20px"}}
             >
                 <Container>
                     <Navbar.Brand href="#home" className="font-weight-bold navbar-logo">
                    Cloud Zero 
                     </Navbar.Brand>
+                    {category.map((i,idx)=>(    
+                    <div>
+                        <h6 key={idx}>kk</h6>
+                    </div>
+                     ))}
                     <Nav className="justify-content-end ">
-                        {location.pathname === '/' && (
-                            <Nav.Link style={{color:"black"}} onClick={() => checkLogin()}>
-                                Add product
-                            </Nav.Link>
-                        )}
                         {localStorage.token  ? (
+                            
                             <div style={{ display: 'flex' }}>
                                 <Nav.Link style={{color:"black"}} onClick={() => logOut()}>
                                     Logout
@@ -100,7 +116,7 @@ function Header() {
                     </Nav>
                 </Container>
                 <Login show={show} setShow={setShow} />
-                <AddProduct show={showProduct} setShow={setShowProduct} />
+                {/* <AddProduct show={showProduct} setShow={setShowProduct} /> */}
             </nav>
         </>
     );

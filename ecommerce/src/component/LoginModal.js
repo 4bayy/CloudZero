@@ -34,19 +34,19 @@ function Login({ show, setShow }) {
             email: username,
             password: password,
           })
-          .then((res) => {
-             console.log(res);
-             setToken(res.data.result);
-             console.log("Logged Succesfully");
-             if(isAdministrator())
-             {
-                 console.log(isAdministrator());
-                 return navigate('/admin');
-             }
-             return navigate('/');
+           .then((res) => {
+               console.log(res);
+               setToken(res.data.result);
+               console.log("Logged Succesfully");
+               if(isAdministrator())
+               {
+                console.log(isAdministrator());
+                return navigate('/admin');
+               }
+            return navigate('/');
           })
-          .catch((err) => {
-            alert('login failed');
+            .catch((err) => {
+               alert('login failed');
           });
       } catch (error) {
         toast.error(error.message);
@@ -62,10 +62,10 @@ function Login({ show, setShow }) {
           <Modal.Body>
             <Form onSubmit={handleSubmit}>
               <Form.Group className="mb-3" controlId="username">
-                <Form.Label>User Name</Form.Label>
+                <Form.Label>Enter your Email</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Type Username"
+                  placeholder="Email"
                   autoFocus
                   name="username"
                   value={username}
@@ -82,10 +82,10 @@ function Login({ show, setShow }) {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </Form.Group>
-              <Button variant="secondary" onClick={handleClose}>
+              <Button className='m-2 rounded' variant="secondary" onClick={handleClose}>
                 Close
               </Button>
-              <Button variant="primary" type="submit">
+              <Button   className='m-2 rounded' variant="primary " type="submit">
                 Login
               </Button>
             </Form>

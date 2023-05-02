@@ -23,7 +23,7 @@ function AddProduct({ show, setShow }) {
     const submit = e =>{
         e.preventDefault()
         console.log(data);
-        axios.post(base_url+'Prodduct',{
+        axios.post(base_url+'Product',{
             name:data.name,
             description:data.description,
             price:data.price,

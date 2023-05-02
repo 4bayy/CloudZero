@@ -6,7 +6,6 @@ export const cartSlice =createSlice({
     initialState:{
         count:0,
         cartItems:[],
-        wishList:[],
         wcount:0
     },
     reducers:{

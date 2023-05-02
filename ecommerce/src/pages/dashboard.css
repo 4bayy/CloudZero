@@ -87,35 +87,40 @@
 }
 .products-category-section
 {
-    padding-top: 180px;
+    padding-top: 60px;
     padding-bottom: 100px;
     width: 100%;
-   text-align: center;
-}
-.product-category-text
-{
-    padding-bottom: 40px;
-}
-.product-card
-{
-    padding: 5px;
-}
-.category-whatsspecial-subheading
-{
-    font-size: 28px;
+
 }
 .category-whatsspecial
 {
-    font-family: Vidaloka;
-    font-size: 42px;
+    padding-bottom: 10px;
+    padding-top: 40px;
+}
+.brands-container
+{
+    padding-left: 20px;
+}
+
+.product-cards
+{
+    margin: 10px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+.category-whatsspecial
+{
+    font-family:'Times New Roman', Times, serif;
+    font-size: 30px;
+    margin-left: 10px;
+    font-weight: bold;
     text-transform: uppercase;
 }
 .dashboard-category-div
 {
     margin-top: 25px;
-    padding-top: 8px;
-    margin-right: 10px;
-    margin-left: 10px;
+    padding-top: 8px; 
     /* border-top-right-radius: 10px; */
     /* border-top-left-radius: 10px; */
     display: flex;
@@ -144,6 +149,30 @@
     display: inline-block;
     font-size: 50px;
 }
+#dashboard-heading-title
+{
+    font-size: 60px;
+    font-weight: bold;
+    /* padding-top: 200px; */
+    padding-left: 20px;
+    
+}
+#dashboard-content-one
+{
+    padding-top: 200px;
+}
+#dashboard-heading-paraone
+{
+    padding-left: 20px; 
+}
+.exploremore-btn
+{
+    background-color: #0F172A;
+    border-radius: 10px;
+    color:white;
+    padding: 10px;
+    margin-left: 16px;
+}
 .dashboard-category-section {
     background-color: black;
     color: white;
@@ -170,6 +199,37 @@
     width: 100%;
     padding: 100px 10px  100px 10px;
     text-align: center;
+}
+.dashboard-static-section
+{
+    background-color: #E3FFE6;
+    height:100vh;
+    text-align:left;
+    margin: 30px;
+    border-radius: 10px;
+}
+.home-product-section
+{
+    padding-bottom: 100px;
+}
+.new-arrivals
+{
+    background-color: #F4F2DF;
+    margin-left: 10px;
+    padding: 30px;
+    padding-top: 100px;
+}
+.gift-cards
+{
+    background-color: #F4E9E9;
+    padding-top: 100px;
+   
+}
+.showme-all
+{
+    background-color: white;
+    border: 0px;
+    color:rgb(230, 231, 229);
 }
 .dashboard-offer-section-divone
 {
@@ -207,22 +267,24 @@
 }
 .offerimage
 {
-    width: 250px;
+    width: 230px;
     padding: 5px;
 }
 .offerimage-three
 {
-    width: 250px;
+    width: 220px;
+    padding: 5px;
+
    padding-top: 15px;
 }
 
-.corousal-heading {
-    font-size: 70px;
+.corousal-heading, .slidertwo-heading {
+    font-size: 50px;
     font-family: Poppins, Arial, Helvetica, sans-serif;
     color: white;
 }
 .corousal-para {
-    font-size: 30px;
+    font-size: 20px;
     letter-spacing: 1.5px;
 }
 .corousal-button {
@@ -231,6 +293,11 @@
     background-color: black;
     color: white;
     border-radius: 3px;
+}
+.new-arrival-text
+{
+    padding-top:100px;
+    padding-bottom: 50px;
 }
 /* Parallax */
 .parallax

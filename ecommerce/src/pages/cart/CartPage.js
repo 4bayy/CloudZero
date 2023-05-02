@@ -7,14 +7,23 @@ import {MdRemoveShoppingCart } from 'react-icons/md';
 import Header from "../../component/Header";
 import { useNavigate } from "react-router-dom";
 import bag from '../../images/bag.avif';
+import { useState } from "react";
 function CartPage() {
   const state = useSelector((state) => state.carts);
-  let totalPrice = 0;
+  const cartItem = state.cartItems;
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  state.cartItems.forEach((item) => {
-    totalPrice += item.price;
-  });
+  const [sum,setSum]=useState(0);
+
+  const totalPrice =()=>{
+    state.cartItems.forEach((item) => {
+        setSum(item.price+ item.price);
+    });
+    console.log(sum);
+  }
+  console.log(cartItem);
+
   return (
    
     <div className="checkout-container">
@@ -56,8 +65,8 @@ function CartPage() {
                               </a>
                             </td>
 
-                            <td class="product-name" data-title="Product">
-                              {i.title}
+                            <td class="product-name" data-title="Product" style={{color:"black",textDecoration:"none"}}>
+                              {i.name}
                             </td>
 
                             <td class="product-name" data-title="Price">
@@ -96,7 +105,7 @@ function CartPage() {
                 <ul class="list-unstyled mb-4">
                   <li class="d-flex justify-content-between pb-2 mb-3">
                     <h5>Subtotal</h5>
-                    <span>{totalPrice}</span>
+                    <span>{sum}</span>
                   </li>
                   <li class="d-flex justify-content-between pb-2 mb-3">
                     <h5>Shipping</h5>
@@ -104,7 +113,7 @@ function CartPage() {
                   </li>
                   <li class="d-flex justify-content-between pb-2">
                     <h5>Total</h5>
-                    <span>${totalPrice}</span>
+                    <span>${sum}</span>
                   </li>
                 </ul>
                 <a href="#" class="btn btn-main btn-small">
